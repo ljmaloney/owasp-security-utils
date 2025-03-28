@@ -9,6 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * XssServletRequestWrapper
+ * This class extends <code>HttoServletRequestWrapper</code> and uses StringEscapeUtils to sanitize input
+ * strings using <code>org.apache.commons.lang.StringEscapeUtils</code>. This will have marginally better
+ * performance than <code>XSSRequestWrapper</code> which uses ESAPI and JSOUP.
+ */
 @Slf4j
 public class XssServletRequestWrapper extends HttpServletRequestWrapper {
     public XssServletRequestWrapper(HttpServletRequest request) {

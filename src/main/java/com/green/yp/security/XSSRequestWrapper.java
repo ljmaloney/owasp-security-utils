@@ -15,6 +15,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.owasp.esapi.ESAPI;
 
+/**
+ * Class extending <code>HttpServletRequestWrapper</code> and providing functionality using
+ * ESAPI and JSOUP to sanitize input parameters and json payloads.
+ */
 @Slf4j
 public final class XSSRequestWrapper extends HttpServletRequestWrapper {
 

@@ -28,9 +28,7 @@ public interface XssSanitizeInterface {
     default String getCanonicalizedString(final String value) {
         String stripedValue = getEsapiEncoder().canonicalize(value);
         // Avoid null characters
-        stripedValue = PATTERN_NULL.matcher(stripedValue).replaceAll("");
-
-        return stripedValue;
+        return PATTERN_NULL.matcher(stripedValue).replaceAll("");
     }
 
     Encoder getEsapiEncoder();
