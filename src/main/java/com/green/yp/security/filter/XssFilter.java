@@ -31,14 +31,17 @@ public class XssFilter extends HttpFilter implements Filter {
 
         final String path = request.getServletPath();
 
-        if (EXCLUDED_URL_LIST.stream().anyMatch(path::startsWith)) {
-
+        if (excludeURL(path)) {
             log.debug("Ignoring XSSContentFilter for {}", path);
             filterchain.doFilter(request, response);
         } else {
-            log.debug("Sanitizing content using XSSRequestWrapper", path);
+            log.debug("Sanitizing content using XSSRequestWrapper {}", path);
             filterchain.doFilter(new XSSRequestWrapper(request), response);
         }
+    }
+
+    public boolean excludeURL(String requestPath){
+        return EXCLUDED_URL_LIST.stream().anyMatch(requestPath::startsWith);
     }
 
     @Override

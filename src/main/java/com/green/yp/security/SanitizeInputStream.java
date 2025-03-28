@@ -3,14 +3,15 @@ package com.green.yp.security;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.regex.Pattern;
+import java.util.List;
+
 import org.owasp.esapi.ESAPI;
 import org.owasp.esapi.Encoder;
+import org.owasp.esapi.reference.DefaultEncoder;
 
 public class SanitizeInputStream implements XssSanitizeInterface {
 
     private static final char JSON_STRING_DELIMITER = '"';
-    private static final Pattern PATTERN_NULL = Pattern.compile("\0");
 
     private final StringBuilder cleanJsonString = new StringBuilder(512);
 
@@ -53,9 +54,9 @@ public class SanitizeInputStream implements XssSanitizeInterface {
     public Encoder getEsapiEncoder() {
         if (esapiEncoder == null) {
             ESAPI.initialize("org.owasp.esapi.reference.DefaultSecurityConfiguration");
-            esapiEncoder = ESAPI.encoder();
-            //            esapiEncoder = new
-            // DefaultEncoder(List.of("JSONCodec","HTMLEntityCodec","PercentCodec"));
+//            esapiEncoder = ESAPI.encoder();
+              esapiEncoder = new
+                      DefaultEncoder(List.of("JSONCodec","HTMLEntityCodec","PercentCodec"));
         }
         return esapiEncoder;
     }
